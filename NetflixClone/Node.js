@@ -12,7 +12,7 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/html', express.static(path.join(__dirname, 'html')));
 
 app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, 'Mainpage.html');
+  const filePath = path.join(__dirname, 'index.html');
   res.sendFile(filePath);
 });
 
