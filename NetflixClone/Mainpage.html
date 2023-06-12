@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix-like Homepage with Slider</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <button class="menu-button">Menu</button>
+      </div>
+      <div class="header-right">
+        <input type="text" class="search-bar" placeholder="Search">
+        <div class="header-buttons">
+          <button class="account-button">Account</button>
+          <button class="wishlist-button">Wishlist</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <header class="header">
+      <h1>Recommended Content</h1>
+    </header>
+    <div class="movie-list">
+
+    <div class="recommendations-wrapper">
+      <div class="slider">
+        <div class="slider-container">
+          <div class="slider-item">
+            <img class="recommendation-image" src="/images/lordoftherings.jpg" alt="Recommendation 1">
+            <h2 class="recommendation-title">Recommendation 1</h2>
+          </div>
+          <div class="slider-item">
+            <img class="recommendation-image" src="images/MV5BMGE0YmJlMzAtNmU1YS00NzA5LWE0MWItODQzODhmZDBhZGU3XkEyXkFqcGdeQXVyMTA3MzQ4MTc0._V1_.jpg" alt="Recommendation 2">
+            <h2 class="recommendation-title">Recommendation 2</h2>
+          </div>
+          <div class="slider-item">
+            <img class="recommendation-image" src="images/Naruto.jpg" alt="Recommendation 3">
+            <h2 class="recommendation-title">Recommendation 3</h2>
+          </div>
+          <div class="slider-item">
+            <img class="recommendation-image" src="images/Potter.jpg" alt="Recommendation 4">
+            <h2 class="recommendation-title">Recommendation 4</h2>
+          </div>
+          <!-- Add more recommendation items as needed -->
+        </div>
+      </div>
+    </div>
+      <div class="slider-buttons">
+        <button id="prev-btn">&lt;</button>
+        <button id="next-btn">&gt;</button>
+      </div>
+    </div>
+  </div>
+  <!-- Side menu -->
+  <div class="side-menu">
+    <button class="close-button">&times;</button>
+    <ul class="genre-list">
+          <li><a href="/genre-template/action">Action</a></li>
+      <li><a href="/genre-template/drama">Drama</a></li>
+      <li><a href="/genre-template/comedy">Comedy</a></li>
+      <!-- Add more genres as needed -->
+    </ul>
+  </div>
+  <div class="genre-template" id="genre-template">
+    <!-- The content of the genre-template.html will be dynamically loaded here -->
+  </div>
+  <script src="/js/slider.js"></script>
+  <script src="/js/genres.js"></script>
+</body>
+</html>

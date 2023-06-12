@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Genre</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <!-- Header content -->
+  </header>
+  
+  <div class="container">
+    <header class="header">
+      <h1 id="genre-heading">Movie Genre</h1>
+    </header>
+    <div class="genre-list"></div> <!-- Add the genre list container -->
+    <div class="movie-list">
+      <!-- Movie cards or details will be dynamically added here -->
+    </div>
+  </div>
+  
+  <div class="pop-up-container"></div>
+
+  <script src="/js/genres.js"></script>
+  <script>
+
+  // Update genre heading based on the selected genre
+  const genreHeading = document.getElementById('genre-heading');
+  const genre = window.location.pathname.split('/').pop(); // Extract the genre from the URL path
+  genreHeading.textContent = genre.charAt(0).toUpperCase() + genre.slice(1);
+
+  // Fetch movie data for the selected genre
+  fetch(`/api/movies/${genre}`)
+    .then((response) => response.json())
+    .then((movies) => {
+      // Display the movie data on the page
+      const movieList = document.querySelector('.movie-list');
+      const popUpContainer = document.querySelector('.pop-up-container');
+
+      movies.forEach((movie) => {
+        const movieCard = document.createElement('div');
+        movieCard.classList.add('movie-card');
+        movieCard.innerHTML = `
+          <h2>${movie.title}</h2>
+          <img src="/api/movies/images/${genre}/${encodeURIComponent(movie.title)}" alt="${movie.title}">
+        `;
+        movieList.appendChild(movieCard);
+
+        movieCard.addEventListener('click', () => {
+          const videoContainer = document.createElement('div');
+          videoContainer.classList.add('video-container');
+
+          const video = document.createElement('video');
+          video.src = movie.url;
+          video.controls = true;
+
+          const closeBtn = document.createElement('button');
+          closeBtn.classList.add('close-btn');
+          closeBtn.textContent = 'Close';
+
+          videoContainer.appendChild(video);
+          videoContainer.appendChild(closeBtn);
+          popUpContainer.appendChild(videoContainer);
+          popUpContainer.style.display = 'flex';
+
+          closeBtn.addEventListener('click', () => {
+            popUpContainer.style.display = 'none';
+            popUpContainer.removeChild(videoContainer);
+          });
+
+          popUpContainer.addEventListener('click', (event) => {
+            if (event.target === popUpContainer) {
+              popUpContainer.style.display = 'none';
+              popUpContainer.removeChild(videoContainer);
+            }
+          });
+        });
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching movie data:', error);
+    });
+  </script>
+</body>
+</html>
